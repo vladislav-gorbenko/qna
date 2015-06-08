@@ -1,14 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
-	describe 'assotiations' do
-		it {should have_many(:answers)}
-	end
 
-	describe 'validation' do
+		it {should have_many(:answers)}
+
 	  it {should validate_presence_of :title}
 	  it {should validate_presence_of :body}
-	end
+		it { should validate_length_of(:title).is_at_least(10).is_at_most(256) }
+	  it {should validate_length_of(:body).is_at_least(5).is_at_most(3000) }
+
+
 
 	describe 'when remove question should remove answers' do
 		let!(:question_1){FactoryGirl.create(:question, title:'Hello world!', body: "How do it say simply?")}
